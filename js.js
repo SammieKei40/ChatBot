@@ -1,4 +1,29 @@
 var trigger = [
+	
+  ["hi", "hey", "hello", "good morning", "good afternoon"],
+  ["how are you", "how is life", "how are things"],
+  ["what are you doing", "what is going on", "what is up"],
+  ["how old are you"],
+  ["who are you", "are you human", "are you bot", "are you human or bot"],
+  ["who created you", "who made you"],
+  [
+    "your name please",
+    "your name",
+    "may i know your name",
+    "what is your name",
+    "what call yourself"
+  ],
+  ["i love you"],
+  ["happy", "good", "fun", "wonderful", "fantastic", "cool"],
+  ["bad", "bored", "tired"],
+  ["help me", "tell me story", "tell me joke"],
+  ["ah", "yes", "ok", "okay", "nice"],
+  ["thanks", "thank you"],
+  ["bye", "good bye", "goodbye", "see you later"],
+  ["what should i eat today"],
+  ["bro"],
+  ["what", "why", "how", "where", "when"],
+
 	["hi","hey","hello"], 
 	["how are you", "how is life", "how are things"],
 	["what are you doing", "what is going on"],
@@ -14,6 +39,34 @@ var trigger = [
 	["bye", "good bye", "goodbye", "see you later"]
 ];
 var reply = [
+	
+  ["Hello!", "Hi!", "Hey!", "Hi there!"],
+  [
+    "Fine... how are you?",
+    "Pretty well, how are you?",
+    "Fantastic, how are you?"
+  ],
+  [
+    "Nothing much",
+    "About to go to sleep",
+    "Can you guess?",
+    "I don't know actually"
+  ],
+  ["I am infinite"],
+  ["I am just a bot", "I am a bot. What are you?"],
+  ["The one true God, JavaScript"],
+  ["I am Efua", "Efua is my name"],
+  ["I love you too", "Me too"],
+  ["Have you ever felt bad?", "Glad to hear it"],
+  ["Why?", "Why? You shouldn't!", "Try watching TV"],
+  ["What about?", "Once upon a time..."],
+  ["Tell me a story", "Tell me a joke", "Tell me about yourself"],
+  ["You're welcome"],
+  ["Bye", "Goodbye", "See you later"],
+  ["Sushi", "Pizza"],
+  ["Bro!"],
+  ["Yes?"],
+	
 	["Hi","Hey","Hello"], 
 	["Fine", "Pretty well", "Fantastic"],
 	["Nothing much", "About to go to sleep", "Can you guest?", "I don't know actually"],
@@ -31,7 +84,6 @@ var reply = [
 
 const usermessage = document.querySelector(".chat-message"); 
 var button = document.getElementById('btn');
-let chatareaouter = document.querySelectorAll('.chat .self') 
 
 
 
@@ -56,7 +108,7 @@ button.addEventListener("click", function(){
 		 //Enter button
 		 
         var input = document.getElementById("text1").value;
-		usermessage.innerHTML += input +"<br>";
+		document.getElementById("selfmessages").innerHTML = input;
         output(input);
         
 	
@@ -81,7 +133,29 @@ function output(input){
 	document.getElementById("botmessage").innerHTML = product;
 	speak(product);
 	document.getElementById("text1").value = ""; //clear input value
+
+  //update DOM
+  addChat(input, product);
 }
+
+function addChat(input, product) {
+	const mainDiv = document.getElementById("output");
+	let userDiv = document.createElement("div");
+	userDiv.innerHTML = `<ul class="chat-message" id="selfmessages">${input}</ul>`;
+	mainDiv.appendChild(userDiv);
+  
+	const Div = document.getElementById("input");
+	let botDiv = document.createElement("div");
+	botDiv.id = "botmessages";
+	botDiv.innerHTML = `<ul class="chat-message" id="botmessages">${product}</ul>`;
+	Div.appendChild(botDiv);
+	speak(product);
+  }
+
+
+
+
+
 
 function compare(arr, array, string){
 	var item;
@@ -105,3 +179,4 @@ function speak(string){
 	utterance.pitch = 2; //0-2 interval
 	speechSynthesis.speak(utterance);
 }
+
